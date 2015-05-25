@@ -8,4 +8,4 @@ WORKDIR /src/
 
 EXPOSE 3000
 
-CMD /src/start.sh
+CMD /src/launch.sh
