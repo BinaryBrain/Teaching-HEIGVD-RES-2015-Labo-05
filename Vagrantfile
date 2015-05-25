@@ -18,4 +18,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #  v.memory = 1024
   #  v.cpus = 2
   #end
+
+  Vagrant.configure("2") do |config|
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  end
 end
