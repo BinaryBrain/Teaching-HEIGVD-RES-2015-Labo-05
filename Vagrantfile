@@ -13,13 +13,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.forward_x11 = true
 
   #config.vm.network "forwarded_port", guest: 80, host: 8080
+  #docker.ports = ['80:80', '443:443', '3000:3000']
 
   #config.vm.provider "virtualbox" do |v|
   #  v.memory = 1024
   #  v.cpus = 2
   #end
 
-  Vagrant.configure("2") do |config|
-  config.vm.network "forwarded_port", guest: 80, host: 8080
-  end
 end
