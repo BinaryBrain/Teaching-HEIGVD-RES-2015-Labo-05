@@ -31,3 +31,13 @@ wget -qO- https://get.docker.com/ | sh
 sudo usermod -aG docker vagrant
 
 # Custom installation starts here...
+
+cd /vagrant
+./labo_build.sh
+
+# Docker UI
+docker run -d -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock dockerui/dockerui
+
+
+
+
