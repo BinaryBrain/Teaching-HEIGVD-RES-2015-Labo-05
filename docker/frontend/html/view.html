@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random generator</title>
+
+	<style>
+	html {
+		background: #fbfbfb;
+		color: #333;
+		padding: 20px;
+	}
+	pre {
+		background: #f4f4f4;
+		padding: 10px;
+		border-radius: 5px;
+	}
+	</style>
+
+	<script src="microajax.js"></script>
+</head>
+<body>
+	<p>Server ip : <?= $serverIp ?></p>
+
+	<pre><?php print_r($_SERVER); ?></pre>
+
+	<script>
+	microAjax("http://<?= trim($VMIp);?>:3000/rand", function(res) {
+		console.log(res);
+		// alert(res);
+	});
+	</script>
+</body>
+</html>
