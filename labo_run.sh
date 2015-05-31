@@ -26,3 +26,4 @@ containerIp res-backend-run1
 
 
 # docker run res-backend node index.js
+# docker exec -it res-loadbalancer-run1 bash
