@@ -14,4 +14,8 @@ WORKDIR /src/
 
 RUN npm install
 
-CMD pm2 start -x /src/index.js --no-daemon
+# CMD pm2 start -x /src/index.js --no-daemon
+
+# CMD pm2 start -x /src/heartbeat.js --no-daemon
+
+CMD /src/launch.sh
