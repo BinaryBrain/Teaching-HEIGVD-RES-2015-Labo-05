@@ -15,5 +15,5 @@ echo "${b}# LABO RUN${n}"
 ./labo_run.sh
 echo
 
-echo "${b}# LABO RUN LB${n}"
+echo "${b}# LABO RUN Loadbalancer${n}"
 ./labo_run_lb.sh
