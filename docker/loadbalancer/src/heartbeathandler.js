@@ -50,10 +50,14 @@ function removeDeadBackends() {
 	var aliveBackends = [];
 
 	for (var i = 0, l = backends.length; i < l; i++) {
-		if (new Date() - backends[i] <= DEAD_AFTER_TIME) {
+		if (new Date() - backends[i].lastBeat <= DEAD_AFTER_TIME) {
 			aliveBackends.push(backends[i]);
 		}
 	}
+
+	backends = aliveBackends;
+
+	console.log(backends);
 }
 
 setInterval(removeDeadBackends, REMOVE_DEAD_AFTER_TIME);
