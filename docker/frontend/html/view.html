@@ -12,6 +12,7 @@
 	pre {
 		background: #f4f4f4;
 		padding: 10px;
+		font-size: 11px;
 		border-radius: 5px;
 	}
 	</style>
@@ -21,7 +22,8 @@
 <body>
 	<p>Server ip : <?= $serverIp ?></p>
 
-	<pre><?php print_r($_SERVER); ?></pre>
+	<pre><?= prettyPrint($_SERVER); ?></pre>
+	<pre><?= prettyPrint($_COOKIE); ?></pre>
 
 	<script>
 	microAjax("http://<?= trim($VMIp);?>:3000/rand", function(res) {
