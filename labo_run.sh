@@ -14,7 +14,7 @@ function containerIp {
 # docker run -it -d --name res-frontend1 res-run-frontend
 docker run -d --name res-frontend-run1 -p 80:80 res-frontend
 # docker run -d --name res-frontend-run1 -p 80:8011 res-frontend
-# docker run -d --name res-frontend-run2 -p 80:8022 res-frontend
+docker run -d --name res-frontend-run2 -p 9999:80 res-frontend
 
 
 # docker run -it -d --name res-backend1 res-run-backend
