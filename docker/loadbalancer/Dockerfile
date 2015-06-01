@@ -9,6 +9,7 @@ RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 RUN apt-get update --fix-missing
 RUN apt-get install npm -y
+RUN npm install -g pm2@0.12.9
 
 # Erase default Apache conf
 COPY ./conf/httpd.conf /usr/local/apache2/conf/httpd.conf
@@ -19,4 +20,4 @@ COPY src /src/
 
 WORKDIR /src/
 
-# CMD /src/launch.sh
+# CMD /src/run.sh
