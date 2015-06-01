@@ -10,13 +10,19 @@ function containerIp {
 	echo "${normal}"
 }
 
+function run {
+	docker run -d --name "$1-$2" -p $3:$4 $1
+}
 
+
+# Frontend
 # docker run -it -d --name res-frontend1 res-run-frontend
 docker run -d --name res-frontend-run1 -p 80:80 res-frontend
 # docker run -d --name res-frontend-run1 -p 80:8011 res-frontend
 docker run -d --name res-frontend-run2 -p 9999:80 res-frontend
 
 
+# Backend
 # docker run -it -d --name res-backend1 res-run-backend
 docker run -d --name res-backend-run1 -p 3000:3000 res-backend node index.js
 
