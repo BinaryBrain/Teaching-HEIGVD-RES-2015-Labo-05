@@ -1,5 +1,6 @@
-var dgram = require("dgram");
-var server = dgram.createSocket("udp4");
+var fs = require('fs');
+var dgram = require('dgram');
+var server = dgram.createSocket('udp4');
 
 var PORT = 7666;
 var DEAD_AFTER_TIME = 5000; // ms
@@ -60,6 +61,54 @@ function removeDeadBackends() {
 	console.log(backends);
 }
 
-setInterval(removeDeadBackends, REMOVE_DEAD_AFTER_TIME);
+function regenarateApacheConf() {
+	fs.readFile('../conf/httpd-vhosts-lb.conf', 'utf8', function (err, file) {
+		var lines = file.split(/\n\s*/);
+		var newLines = [];
+		var isInProxy = false;
+
+		var i = 0;
+		var l = lines.length;
+
+		for (; i < l; i++) {
+			newLines.push(lines[i]);
+
+			if (lines[i] === '<Proxy balancer://backend>') {
+				isInProxy = true;
+				break;
+			}
+		}
+
+		for (var j = 0; j < backends.length; j++) {
+			newLines.push('BalancerMember http://' + backends[j].address + ':80');
+		}
+
+		newLines.push('ProxySet lbmethod=byrequests');
+
+		for (; i < l; i++) {
+			if (lines[i] === "</Proxy>") {
+				isInProxy = false;
+			}
+
+			if (!isInProxy) {
+				newLines.push(lines[i]);
+			}
+		}
+
+		var newFile = newLines.join('\n');
+
+		fs.writeFile('../conf/httpd-vhosts-lb.conf', newFile, function (err) {
+			if (err) throw err;
+			console.log('Apache conf updated');
+		});
+	});
+}
+
+function update() {
+	removeDeadBackends();
+	regenarateApacheConf();
+}
+
+setInterval(update, REMOVE_DEAD_AFTER_TIME);
 
 server.bind(PORT);
