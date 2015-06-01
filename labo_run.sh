@@ -6,7 +6,7 @@ green=$(tput setaf 2)
 
 # Run docker
 function run {
-	echo "${bold}$1: "
+	echo "${bold}$1: ${normal}"
 	docker run -d --name "$1-$2" -p $3:$4 $1
 	containerIp "$1-$2"
 }
