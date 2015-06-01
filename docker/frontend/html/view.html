@@ -22,14 +22,18 @@
 <body>
 	<p>Server ip : <?= $serverIp ?></p>
 
-	<pre><?= prettyPrint($_SERVER); ?></pre>
+	<button onclick="ajax()">Get a random number (ajax query)</button>
+
 	<pre><?= prettyPrint($_COOKIE); ?></pre>
+	<pre><?= prettyPrint($_SERVER); ?></pre>
 
 	<script>
-	microAjax("http://<?= trim($VMIp);?>:3000/rand", function(res) {
-		console.log(res);
-		// alert(res);
-	});
+	function ajax() {
+		microAjax("http://<?= trim($VMIp);?>:3000/rand", function(res) {
+			console.log(res);
+			alert(res);
+		});
+	}
 	</script>
 </body>
 </html>
