@@ -1,6 +1,8 @@
 var fs = require('fs');
 var dgram = require('dgram');
 var server = dgram.createSocket('udp4');
+var exec = require('child_process').exec,
+    child;
 
 var PORT = 7666;
 var DEAD_AFTER_TIME = 5000; // ms
@@ -90,7 +92,7 @@ function regenarateApacheConf() {
 
 		// We add every backend to the file
 		for (var j = 0; j < backends.length; j++) {
-			newLines.push('BalancerMember http://' + backends[j].address + ':80');
+			newLines.push('BalancerMember http://' + backends[j].address + ':3000');
 		}
 
 		// Backend proxy config
@@ -113,6 +115,17 @@ function regenarateApacheConf() {
 		fs.writeFile(LOADBALANCER_CONF, newFile, function (err) {
 			if (err) throw err;
 			console.log('Apache conf updated');
+
+			// Shell command
+			child = exec('apachectl restart',
+			  function (error, stdout, stderr) {
+			    console.log('stdout: ' + stdout);
+			    console.log('stderr: ' + stderr);
+			    if (error !== null) {
+			      console.log('exec error: ' + error);
+			    }
+			});
+
 		});
 	});
 }
