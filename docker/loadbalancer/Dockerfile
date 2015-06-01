@@ -10,10 +10,6 @@ RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN apt-get update --fix-missing
 RUN apt-get install npm -y
 
-
-# COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
-# COPY ./balancer.conf /usr/local/apache2/conf/extra/balancer.conf
-# COPY ./app /app
-# COPY ./apache.sh /app/apache.sh
-
-# ENTRYPOINT /app/start.sh
+# Apache conf
+COPY ./conf/httpd.conf /usr/local/apache2/conf/httpd.conf
+COPY ./conf/httpd-vhosts-lb.conf /usr/local/apache2/conf/extra/httpd-vhosts-lb.conf
