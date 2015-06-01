@@ -5,7 +5,8 @@ var server = dgram.createSocket('udp4');
 var PORT = 7666;
 var DEAD_AFTER_TIME = 5000; // ms
 var REMOVE_DEAD_AFTER_TIME = 1000; // ms
-var LOADBALANCER_CONF = '../conf/httpd-vhosts-lb.conf';
+// var LOADBALANCER_CONF = '../conf/httpd-vhosts-lb.conf';
+var LOADBALANCER_CONF = '/usr/local/apache2/conf/extra/httpd-vhosts-lb.conf';
 
 var backends = [];
 
