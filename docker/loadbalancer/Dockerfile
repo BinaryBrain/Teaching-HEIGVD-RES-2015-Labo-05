@@ -11,6 +11,7 @@ RUN apt-get update --fix-missing
 RUN apt-get install npm -y
 RUN npm install -g pm2@0.12.9
 
+
 # Erase default Apache conf
 COPY ./conf/httpd.conf /usr/local/apache2/conf/httpd.conf
 COPY ./conf/httpd-vhosts-lb.conf /usr/local/apache2/conf/extra/httpd-vhosts-lb.conf
@@ -20,4 +21,4 @@ COPY src /src/
 
 WORKDIR /src/
 
-# CMD /src/run.sh
+CMD /src/run.sh
